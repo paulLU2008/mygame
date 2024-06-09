@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            width: 600px;
+            height:600px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        .grid {
+            display: block;
+            width:198px;
+            height:198px;
+            position: relative;
+            border: 1px solid red;
+        }
+        .playerX {
+            background-image: url('cross.png')
+        }
+
+        .playerO {
+            background-image: url('circle.png')
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <div id="p1" class="grid"></div>
+        <div id="p2" class="grid"></div>
+        <div id="p3" class="grid"></div>
+        <div id="p4" class="grid"></div>
+        <div id="p5" class="grid"></div>
+        <div id="p6" class="grid"></div>
+        <div id="p7" class="grid"></div>
+        <div id="p8" class="grid"></div>
+        <div id="p9" class="grid"></div>
+    </div>
+</body>
+</html>
+
+
+<script>
+    let current_player = "playerx";
+    let ox_status = [0,0,0,0,0,0,0,0,0];
+    let p1 = document.getElementById('p1')
+
+        p1.addEventListener('click',()=>{
+        if (ox_status[0] == 0){
+                if (current_player == 'playerx'){
+                    p1.classList.add('playerX');
+                    current_player='playerO'
+                    ox_status[0] = 1;
+                    console.log(ox_status[0])
+                }else{
+                p1.classList.add('playerO');
+                    current_player='playerx';
+                    ox_status[0] = 2;
+                    console.log(ox_status[0])
+                }
+                checkwin();
+         }else{
+            return;
+        }})
+
+     let p2 = document.getElementById('p2')
+        p2.addEventListener('click',()=>{
+        if (ox_status[1] == 0){
+                if(current_player =='playerx'){
+                p2.classList.add('playerX');
+                current_player='playerO'
+                ox_status[1]=1;
+                }else{
+                p2.classList.add('playerO');
+                current_player='playerx';
+                ox_status[1] = 2;
+                }
+                checkwin();
+            }else{
+                return;
+          }})
+        
+    let p3 = document.getElementById('p3')
+        p3.addEventListener('click',()=>{
+                if (ox_status[2] ==0){
+                    if(current_player =='playerx'){
+                    p3.classList.add('playerX');
+                    current_player='playerO'
+                    ox_status[2]=1;
+                }else{
+                p3.classList.add('playerO');
+                    current_player='playerx';
+                    ox_status[2]=2
+                }
+                checkwin();
+                }else{
+                return;
+            }})
+        
+    let p4 = document.getElementById('p4')
+        p4.addEventListener('click',()=>{
+            if (ox_status[3] ==0){
+                    if(current_player =='playerx'){
+                    p4.classList.add('playerX');
+                    current_player='playerO'
+                    ox_status[3]=1;
+                }else{
+                p4.classList.add('playerO');
+                    current_player='playerx';
+                    ox_status[3]=2;
+                }
+                checkwin();
+            }else{
+                return;
+          }})
+        
+    let p5 = document.getElementById('p5')
+        p5.addEventListener('click',()=>{
+        if (ox_status[4] ==0){
+                    if(current_player =='playerx'){
+                    p5.classList.add('playerX');
+                    current_player='playerO'
+                    ox_status[4]=1;
+                }else{
+                p5.classList.add('playerO');
+                    current_player='playerx';
+                    ox_status[4]=2
+                }
+                checkwin();
+            }else{
+                return;
+          }})
+               
+    let p6 = document.getElementById('p6')
+        p6.addEventListener('click',()=>{
+        if (ox_status[5]==0){
+                    if(current_player =='playerx'){
+                  p6.classList.add('playerX');
+                    current_player='playerO'
+                    ox_status[5]=1;
+                }else{
+                p6.classList.add('playerO');
+                    current_player='playerx';
+                    ox_status[5]=2;
+                }
+                checkwin();
+            }else{
+                return;
+          }})
+    
+    let p7 = document.getElementById('p7')
+        p7.addEventListener('click',()=>{
+        if (ox_status[6] ==0){
+                    if(current_player =='playerx'){
+                    p7.classList.add('playerX');
+                    current_player='playerO'
+                    ox_status[6]=1;
+                }else{
+                p7.classList.add('playerO');
+                    current_player='playerx';
+                    ox_status[6]=2;
+                }
+                checkwin();
+            }else{
+                return;
+          }})
+        
+    let p8 = document.getElementById('p8')
+        p8.addEventListener('click',()=>{
+        if (ox_status[7] ==0){
+                    if(current_player =='playerx'){
+                    p8.classList.add('playerX');
+                    current_player='playerO'
+                    ox_status[7]=1;
+                }else{
+                p8.classList.add('playerO');
+                    current_player='playerx';
+                    ox_status[7]=2;
+                }
+                checkwin();
+            }else{
+                return;
+          }})
+        
+    let p9 = document.getElementById('p9')
+        p9.addEventListener('click',()=>{
+        if (ox_status[8] ==0){
+            if(current_player =='playerx'){
+            p9.classList.add('playerX');
+            current_player='playerO'
+            ox_status[8]=1;
+            }else{
+            p9.classList.add('playerO');
+            current_player='playerx';
+            ox_status[8]=2;
+            }
+            checkwin();
+        }else{
+            return;
+          }})
+        
+
+    function checkwin(){
+    console.log(ox_status)
+    console.log(current_player)
+    if(ox_status[0]===ox_status[1]&&ox_status[1]===ox_status[2]&&ox_status[0]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    if(ox_status[0]===ox_status[3]&&ox_status[3]===ox_status[6]&&ox_status[0]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    if(ox_status[3]===ox_status[4]&&ox_status[4]===ox_status[5]&&ox_status[3]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    if(ox_status[6]===ox_status[7]&&ox_status[7]===ox_status[8]&&ox_status[6]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    if(ox_status[1]===ox_status[4]&&ox_status[4]===ox_status[7]&&ox_status[7]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    if(ox_status[2]===ox_status[5]&&ox_status[5]===ox_status[8]&&ox_status[8]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    if(ox_status[0]===ox_status[4]&&ox_status[4]===ox_status[8]&&ox_status[0]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    if(ox_status[2]===ox_status[4]&&ox_status[4]===ox_status[6]&&ox_status[6]!==0){
+    console.log('win');
+    result=current_player+' lose'
+    alert(result);
+    return;
+    }
+    }
+</script>
+                
+                
+             
