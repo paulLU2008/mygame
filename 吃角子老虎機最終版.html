@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吃角子老虎機</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/newgame.jpeg'); /* 設置背景圖片 */
+            /* background-size: cover; 背景圖片覆蓋整個容器 */
+            background-repeat: no-repeat; /* 背景圖片不重複 */
+            background-position: center center; /* 背景圖片置中 */
+        }
+        .main{
+            width: 100vw; /* 設置寬度為視口寬度 */
+            height: 100vh; /* 設置高度為視口高度 */
+            justify-content: center; /* 水平置中 */
+            align-items: center; /* 垂直置中 */
+            display: flex;
+            flex-wrap: wrap;
+            /* 微调位置 */
+            padding-top: 20px;  /* 向下移动内部内容10px */
+            padding-left: 5px;  /* 向右移动内部内容5px */
+            flex-direction: row;
+            border: 1px solid rgba(152, 82, 217, 0.856);
+
+        }
+        .grid {
+            display: block;
+            width: 102px;
+            height: 230px;
+            margin: 7px; /* 設置元素之間的空隙 */
+            position: relative;
+            border: 1px solid red;
+            background-position: center center; /* 使图片居中 */
+            background-repeat: no-repeat; /* 背景圖片不重複 */
+        }
+        .button {
+            position: absolute; /* 設置絕對定位 */
+            top:77%;
+            left: 62.5%;
+            width: 120px;
+            height: 60px;
+        }
+        .score-board {
+            position: absolute;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        #score {
+            position: absolute; /* 允许通过 top 和 left 属性定位 */
+            bottom:-29px;
+            justify-content: center; /* 水平置中 */
+            /* left: 200px; */
+            /* background-color: rgba(255, 255, 255, 0); */
+            background-color:black;
+            padding-left: 110px;
+            padding-right: 110px;
+            border-radius: 30px;
+            border: none
+        }
+        .money-board {
+            position: absolute;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        #money {
+            position: absolute; /* 允许通过 top 和 left 属性定位 */
+
+            justify-content: center; /* 水平置中 */
+            /* align-items: center; 垂直置中 */
+            top: 70%;
+            /* left: 200px; */
+            /* background-color: rgba(255, 255, 255, 0);透明背景 */
+            background-color:rgb(186, 36, 17);
+            border-radius: 30px;
+            padding: 10px;
+            border: none
+            /* border: 1px solid black; */
+        }
+        .add_money{
+            position: absolute;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        #add_money{
+            position: absolute;
+            top: 80%;
+            justify-content: center;
+            background-color:rgb(82, 17, 186);
+            border-radius: 10px;
+            padding: 5px;
+            border: 3px solid rgb(40, 223, 77);
+        }
+        </style>
+</head>
+<body>
+    <div id="all" class="main">
+        <div id="score" class="score-board">Score: 0</div>
+        <div id="money" class="money-board">Money: 10000</div>
+        <div id="add_money" class="add_money">加值按鈕: +</div>
+        <div id="p1" class="grid"></div>
+        <div id="p2" class="grid"></div>
+        <div id="p3" class="grid"></div>
+        <!-- <button id="increase-score">Increase Score</button> -->
+    </div>
+</body>
+</html>
+<script>
+let all = document.getElementById('all')
+let p1 = document.getElementById('p1')
+let p2 = document.getElementById('p2')
+let p3 = document.getElementById('p3')
+let scoreBoard = document.getElementById('score')
+let moneyBoard = document.getElementById('money')
+let add_money = document.getElementById('add_money')
+
+let money = 10000
+let score = 0
+moneyBoard.style.color = 'yellow'
+scoreBoard.style.color = 'white';
+add_money.style.color = 'rgb(40, 223, 77)';
+function updateScore() {
+            scoreBoard.textContent = `Score: ${score}`;
+        }
+function updateMoney(){
+            moneyBoard.textContent = `Money: ${money}`;
+        }
+
+
+        
+        add_money.addEventListener('click', () => {
+    let card_name, card_Passworld, howmuchmoney;
+    let check_name = false;
+    let check_Passworld = false;
+
+    // 处理信用卡名称输入和验证
+    while (!check_name) {
+        card_name = prompt('Please enter your credit card name:');
+        if (card_name) {
+            check_name = confirm(`Is this your credit card name?: ${card_name}`);
+            if (!check_name) {
+                alert('The credit card name is incorrect, please try again.');
+            }
+        } else {
+            alert('You didn\'t enter anything.');
+            return; // 如果用户没有输入任何内容，退出函数
+        }
+    }
+
+    // 处理信用卡密码输入和验证
+    while (!check_Passworld) {
+        card_Passworld = prompt('Please enter your credit card password:');
+        if (card_Passworld) {
+            check_Passworld = confirm(`Is this your credit card password?: ${card_Passworld}`);
+            if (!check_Passworld) {
+                alert('The credit card password is incorrect, please try again.');
+            }
+        } else {
+            alert('You didn\'t enter any password.');
+            return; // 如果用户没有输入任何内容，退出函数
+        }
+    }
+
+    // 处理充值金额输入
+    howmuchmoney = parseInt(prompt('How much money do you want to add?: '), 10);
+    if (!isNaN(howmuchmoney)) {
+        money += howmuchmoney;
+        updateMoney();
+    } else {
+        alert('Invalid amount entered.');
+    }
+});
+
+// function randomchange(){
+//     const randomIndex = Math.floor(Math.random() * Imagesfile.length);
+//                     const randomBlock = Imagesfile[randomIndex];
+//                     console.log(randomBlock) 
+
+
+// function changeBackgroundImage() {
+//             // 更新索引
+//             currentIndex = (currentIndex + 1) % images.length;
+
+//             // 设置新的背景图片
+//             grid.style.backgroundImage = `url('./picture/${images[currentIndex]}')`;
+
+//             // 再次调用此函数以创建循环
+//             setTimeout(changeBackgroundImage, 3000); // 3000 毫秒即 3 秒
+//         }
+
+//         // 初次调用函数以启动循环
+//         setTimeout(changeBackgroundImage, 3000); // 3000 毫秒即 3 秒
+
+
+
+
+
+// },3000)
+
+const button = document.createElement('button');
+const Imagesfile =['bells.png','bowp.jpg','cutebaby.jpeg','cheery.jpg','seven.jpeg','watermelon.jpeg']
+
+            // 2. 設置按鈕的屬性和樣式
+            button.textContent = '開始遊戲'; // 設置按鈕文本
+            button.style.backgroundColor = 'rgba(255, 255, 255, 0)'; // 設置背景色
+            button.style.color = 'white'; // 設置文本顏色
+            button.style.padding = '15px 20px'; // 設置內邊距
+            button.style.border = 'none'; // 移除邊框
+            button.style.borderRadius = '10px'; // 設置邊框圓角
+            // button.style.left='';
+            button.classList.add('button');
+            // botton.style.top=''
+            // const rect = all.getBoundingClientRect();
+            // console.log(rect.left)
+            // button.style.left = `${rect.right-450}px`;
+            // console.log(button.style.left)
+            // button.style.top = `${rect.bottom-100}px`;
+
+            document.addEventListener('keydown', (event) => {
+            // Check if the pressed key is the spacebar (key code 32)
+            if (event.code === 'Space') {
+                event.preventDefault(); // Prevent the default action
+                button.click(); // Trigger the button click
+            }
+        });
+
+            const p_all = document.querySelectorAll('.grid')
+            button.addEventListener('click', () => {
+                if(money>99){
+                    money = money-100;
+                    updateMoney();
+
+                    let textpicture =[]
+                    p_all.forEach(p =>{
+                        const randomIndex = Math.floor(Math.random() * Imagesfile.length);
+                        const randomBlock = Imagesfile[randomIndex];
+                        console.log(randomBlock)
+                        p.style.backgroundImage = `url(./picture/${randomBlock})`;
+                        p.style.backgroundSize = "contain";
+                        textpicture.push(randomBlock)
+                    
+                })
+                console.log(textpicture)
+                
+                if(textpicture[0]===textpicture[1]&textpicture[1]===textpicture[2]){
+                    score += 10000; // 增加分数
+                    updateScore(); // 更新计分栏
+                    console.log(score)
+                }
+                if(textpicture[0]===textpicture[1]&textpicture[0]!==textpicture[2]){
+                    score += 500; // 增加分数
+                    updateScore(); // 更新计分栏
+                    console.log(score)
+                }
+                if(textpicture[0]===textpicture[2]&textpicture[0]!==textpicture[1]){
+                    score += 500; // 增加分数
+                    updateScore(); // 更新计分栏
+                    console.log(score)
+                }
+                if(textpicture[1]===textpicture[2]&textpicture[1]!==textpicture[0]){
+                    score += 500; // 增加分数
+                    updateScore(); // 更新计分栏
+                    console.log(score)
+                }
+                if(money<100){
+                    alert(`總共得分: ${score}分 ,請加值後繼續遊玩`)
+                }
+            }
+            })
+        
+            all.appendChild(button);
+</script>
